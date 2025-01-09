@@ -1,5 +1,6 @@
 import time 
 import pygame
+import os
 import sys
 
 import game
@@ -11,7 +12,9 @@ pygame.display.set_caption("Pong V2")
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 clock = pygame.time.Clock()
 
-font = pygame.font.Font("assets/fonts/ARCADECLASSIC.TTF", 55)
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+font = pygame.font.Font("../../assets/fonts/ARCADECLASSIC.TTF", 55)
 button_text = font.render("play", True, (255,255,255))
 button_rect = button_text.get_rect(center=(WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 100) * 45 ))
 

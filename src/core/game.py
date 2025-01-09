@@ -113,7 +113,7 @@ def main():
         ball.draw(screen)
 
         # render scores
-        font = pygame.font.Font("assets/fonts/ARCADECLASSIC.TTF", 74)
+        font = pygame.font.Font("../../assets/fonts/ARCADECLASSIC.TTF", 74)
         score_text1 = font.render(str(player1_score), True, WHITE)
         score_text2 = font.render(str(player2_score), True, WHITE)
         screen.blit(score_text1, (WINDOW_WIDTH // 4, 20))
