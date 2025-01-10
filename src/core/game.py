@@ -53,8 +53,8 @@ def main():
     }}
 
 
-    paddle1 = Paddle(x=30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=5)
-    paddle2 = Paddle(x=WINDOW_WIDTH - PADDLE_WIDTH - 30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=5)
+    paddle1 = Paddle(x=30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=7)
+    paddle2 = Paddle(x=WINDOW_WIDTH - PADDLE_WIDTH - 30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=7)
     ball = Ball(x=WINDOW_WIDTH//2, y=WINDOW_HEIGHT//2, radius=BALL_RADIUS, ball_type="chaotic")  # 45 degrees
 
     def serveBall(ball, paddle, direction):

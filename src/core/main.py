@@ -19,8 +19,11 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 title_font = pygame.font.Font("../../assets/fonts/ARCADECLASSIC.TTF", 100)  # Larger font for title
 button_font = pygame.font.Font("../../assets/fonts/ARCADECLASSIC.TTF", 55)  # Smaller font for buttons
 
-# Initialize color animation variables
+options_menu_open = False
 color_time = 0
+
+options_bg = pygame.image.load("../../assets/imgs/options_bg.svg")
+options_bg = pygame.transform.scale_by(options_bg, 7)
 
 # Initial button and title texts
 start_text = button_font.render("play", True, (255, 255, 255))
@@ -52,7 +55,7 @@ while True:
     options_text = button_font.render("options", True, (255, 255, 255))
     exit_text = button_font.render("exit", True, (255, 255, 255))
 
-    # Check if buttons are hovered
+    #check button hover
     mouse_pos = pygame.mouse.get_pos()
     if start_rect.collidepoint(mouse_pos):
         shadow_text = button_font.render("play", True, (0, 155, 155))
@@ -78,18 +81,28 @@ while True:
         screen.blit(shadow_text, shadow_rect)
         exit_text = button_font.render("exit", True, (255, 0, 0))
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for ev in pygame.event.get():
+        if ev.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            if start_rect.collidepoint(event.pos):
-                print("Start button clicked!")
+        elif ev.type == pygame.MOUSEBUTTONDOWN:
+            if start_rect.collidepoint(ev.pos):
+                if options_menu_open:
+                    pass
                 game.main()
-            elif exit_rect.collidepoint(event.pos):
-                print("Exit button clicked!")
-                pygame.quit()
-                sys.exit()
+            elif options_rect.collidepoint(ev.pos):
+                if options_menu_open:
+                    pass
+                else:
+                    options_menu_open = True
+            elif exit_rect.collidepoint(ev.pos):
+                if options_menu_open:
+                    options_menu_open = False
+                    exit_rect = exit_text.get_rect(center=(WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 100) * 75))
+                else:
+                    pygame.quit()
+                    sys.exit()
+            
 
     # Draw title
     screen.blit(gametitle_text, gametitle_rect)
@@ -98,6 +111,21 @@ while True:
     screen.blit(start_text, start_rect)
     screen.blit(options_text, options_rect)
     screen.blit(exit_text, exit_rect)
+
+    if options_menu_open:
+        screen.blit(options_bg, ((WINDOW_WIDTH - options_bg.get_width()) // 2, (WINDOW_HEIGHT - options_bg.get_height()) // 2))
+
+        # Draw the vertical separator in the middle
+        separator_width = 4  # Thickness of the separator
+        separator_height = WINDOW_HEIGHT / 1.7  # Full height of the window
+        separator_x = (WINDOW_WIDTH // 2) - (separator_width // 2)  # Center the separator
+        separator_rect = pygame.Rect(separator_x, (WINDOW_HEIGHT / 100) * 15, separator_width, separator_height)
+
+        pygame.draw.rect(screen, (255,255,255), separator_rect)  # Draw the separator
+
+        exit_text = button_font.render("Back", True, (255, 255, 255))
+        exit_rect = exit_text.get_rect(center=(WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 100) * 82))
+        screen.blit(exit_text, exit_rect)
 
     pygame.display.flip()
     clock.tick(60)

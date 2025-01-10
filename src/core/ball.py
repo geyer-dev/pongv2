@@ -5,25 +5,25 @@ import pygame
 
 ball_types = {
     "normal": {
-        "speed": 5,
+        "speed": 10,
         "gravity": 0,
         "special_effect": None,
         "color": (255, 255, 255)
     },
     "chaotic": {
-        "speed": 5,
+        "speed": 10,
         "gravity": 0,
         "special_effect": "chaotic",
         "color": (255, 0, 0)
     },
     "heavy": {
-        "speed": 3,
+        "speed": 5,
         "gravity": 0.2,
         "special_effect": None,
         "color": (0, 255, 0)
     },
     "sticky": {
-        "speed": 4,
+        "speed": 7,
         "gravity": 0,
         "special_effect": "sticky",
         "color": (0, 0, 255)
