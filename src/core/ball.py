@@ -8,33 +8,30 @@ ball_types = {
         "speed": 10,
         "gravity": 0,
         "special_effect": None,
-        "color": (255, 255, 255)
+        "color": (255, 255, 255),
+        "radius": 12
     },
     "chaotic": {
-        "speed": 10,
+        "speed": 13,
         "gravity": 0,
         "special_effect": "chaotic",
-        "color": (255, 0, 0)
+        "color": (255, 0, 0),
+        "radius": 7
     },
     "heavy": {
         "speed": 5,
         "gravity": 0.2,
         "special_effect": None,
-        "color": (0, 255, 0)
-    },
-    "sticky": {
-        "speed": 7,
-        "gravity": 0,
-        "special_effect": "sticky",
-        "color": (0, 0, 255)
+        "color": (0, 255, 0),
+        "radius": 22
     }}
 
 class Ball:
-    def __init__(self, x, y, radius, ball_type):
+    def __init__(self, x, y, ball_type):
         ball_params = ball_types[ball_type]
         self.x = x
         self.y = y
-        self.radius = radius
+        self.radius = ball_params["radius"]
         self.speed = ball_params["speed"]
         self.gravity = ball_params["gravity"]
         self.special_effect = ball_params["special_effect"]

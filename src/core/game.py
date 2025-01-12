@@ -8,10 +8,9 @@ import time
 from paddle import Paddle
 from ball import Ball
 
-def main():
+def main(ball_index):
     WINDOW_WIDTH, WINDOW_HEIGHT = 1024, 664
     PADDLE_WIDTH, PADDLE_HEIGHT = 20, 100
-    BALL_RADIUS = 10
 
     BLACK = (0, 0, 0)
     WHITE = (255, 255, 255)
@@ -19,43 +18,22 @@ def main():
     GREEN = (50,205,50)
     PURPLE = (255,0,255)
 
+    if ball_index == 0:
+        ball = "normal"
+    elif ball_index == 1:
+        ball = "chaotic"
+    elif ball_index == 2:
+        ball = "heavy"
 
     pygame.init()
     pygame.display.set_caption("Pong V2")
     screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
     clock = pygame.time.Clock()
 
-    
-    ball_types = {
-    "normal": {
-        "speed": 5,
-        "gravity": 0,
-        "special_effect": None,
-        "color": (255, 255, 255)
-    },
-    "chaotic": {
-        "speed": 5,
-        "gravity": 0,
-        "special_effect": "chaotic",
-        "color": (255, 0, 0)
-    },
-    "heavy": {
-        "speed": 3,
-        "gravity": 0.2,
-        "special_effect": None,
-        "color": (0, 255, 0)
-    },
-    "sticky": {
-        "speed": 4,
-        "gravity": 0,
-        "special_effect": "sticky",
-        "color": (0, 0, 255)
-    }}
-
 
     paddle1 = Paddle(x=30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=7)
     paddle2 = Paddle(x=WINDOW_WIDTH - PADDLE_WIDTH - 30, y=WINDOW_HEIGHT//2 - PADDLE_HEIGHT//2, width=PADDLE_WIDTH, height=PADDLE_HEIGHT, color=WHITE, speed=7)
-    ball = Ball(x=WINDOW_WIDTH//2, y=WINDOW_HEIGHT//2, radius=BALL_RADIUS, ball_type="chaotic")  # 45 degrees
+    ball = Ball(x=WINDOW_WIDTH//2, y=WINDOW_HEIGHT//2, ball_type=ball)  # 45 degrees
 
     def serveBall(ball, paddle, direction):
         ball.x = paddle.x + paddle.width if ball.velocity_x > 0 else paddle.x - ball.radius
@@ -82,11 +60,11 @@ def main():
             serveBall(ball, paddle1, direction=1)
 
         # check game over
-        """WINNING_SCORE = 5
+        WINNING_SCORE = 5
         if player1_score >= WINNING_SCORE or player2_score >= WINNING_SCORE:
-            winner = "Player 1" if player1_score >= WINNING_SCORE else "Player 2"
-            print(f"{winner} Wins!")
-            running = False"""
+            winner = "player 1" if player1_score >= WINNING_SCORE else "player 2"
+            print(f"{winner} wins")
+            running = False
 
         # poll for evs
         for event in pygame.event.get():
